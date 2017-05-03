@@ -5,5 +5,5 @@ import org.json.JSONObject;
 
 public interface GetResult {
 
-    public abstract void done(JSONObject jsonObject);
+    void done(JSONObject jsonObject);
 }

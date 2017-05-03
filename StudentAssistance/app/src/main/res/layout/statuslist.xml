@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Major Project - II "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/subjectcode1"
+        android:textAlignment="center" />
+    <TextView
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Major Project - II "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/subjectcode2"
+        android:textAlignment="center" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Major Project - II "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/status"
+        android:textAlignment="center" />
+    <TextView
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Major Project - II "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/matchid"
+        android:textAlignment="center" />
+    <TextView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Major Project - II "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/matchnumber"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/cancel"
+        android:hint="Cancel Request"/>
+
+</LinearLayout>

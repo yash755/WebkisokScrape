@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
 
     int flag=0;
 
-    EditText eno,password,dob;
+    EditText eno,password,dob,phone;
     ImageView calendar,seepassword;
     TextView textView;
 
@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
         dob = (EditText)findViewById(R.id.dob);
         calendar = (ImageView)findViewById(R.id.cal);
         textView = (TextView)findViewById(R.id.login_edit);
+        phone = (EditText)findViewById(R.id.phonenumber);
         seepassword = (ImageView)findViewById(R.id.imageView2);
 
         eno.postDelayed(new Runnable() {
@@ -106,8 +107,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
                     String enos = eno.getText().toString();
                     String passwords = password.getText().toString();
                     String dobs = dob.getText().toString();
+                    String ph = phone.getText().toString();
 
-                    authenticate(enos, passwords, dobs);
+                    authenticate(enos, passwords, dobs,ph);
                 }
                 else {
 
@@ -122,6 +124,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
                                 .playOn(findViewById(R.id.password));
                     }
                     if(dob.getText().toString().trim().equals("")) {
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(findViewById(R.id.dob));
+                    }
+                    if(phone.getText().toString().trim().equals("")) {
                         YoYo.with(Techniques.Tada)
                                 .duration(700)
                                 .playOn(findViewById(R.id.dob));
@@ -171,7 +178,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
 
     private boolean validate() {
         return !eno.getText().toString().trim().equals("") && !password.getText().toString().trim().equals("")
-                && !dob.getText().toString().trim().equals("");
+                && !dob.getText().toString().trim().equals("") && !phone.getText().toString().trim().equals("");
     }
 
     public void hideSoftKeyboard() {
@@ -181,7 +188,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
         }
     }
 
-    void authenticate(String eno,String password,String dob){
+    void authenticate(final String eno, final String password, final String dob, final String phone){
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("eno", eno);
@@ -193,6 +200,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Da
             @Override
             public void done(JSONObject jsonObject) {
                 if (jsonObject != null) {
+                    userLocalStore.userData(eno,password,dob,phone);
                     userLocalStore.setUserloggedIn(true);
                     senddata(jsonObject);
 

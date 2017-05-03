@@ -14,16 +14,26 @@ public class UserLocalStore {
         userLocalDatabase = context.getSharedPreferences(SP_Name,0);
     }
 
-    public void userData(String eno)
+    public void userData(String eno,String password,String dob,String phone)
     {
         SharedPreferences.Editor speditor = userLocalDatabase.edit();
         speditor.putString("eno",eno);
+        speditor.putString("password",password);
+        speditor.putString("dob",dob);
+        speditor.putString("phone",phone);
         speditor.commit();
     }
 
     public String geteno(){
 
         String name = userLocalDatabase.getString("eno", "");
+        return name;
+
+    }
+
+    public String getpno(){
+
+        String name = userLocalDatabase.getString("phone", "");
         return name;
 
     }
@@ -54,32 +64,6 @@ public class UserLocalStore {
 
     }
 
-    public void setGcm(String token){
-        SharedPreferences.Editor speditor = userLocalDatabase.edit();
-        speditor.putString("gcm",token);
-        speditor.commit();
 
-    }
-
-    public String getgcm(){
-
-        String name = userLocalDatabase.getString("gcm", "");
-        return name;
-
-    }
-
-    public void setWishlistCount(int count){
-        SharedPreferences.Editor speditor = userLocalDatabase.edit();
-        speditor.putInt("wishlistCount",count);
-        speditor.commit();
-
-    }
-
-    public int getWishlistCount(){
-
-        int name = userLocalDatabase.getInt("wishlistCount",0);
-        return name;
-
-    }
 
 }
