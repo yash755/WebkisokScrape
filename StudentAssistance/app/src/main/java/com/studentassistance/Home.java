@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,6 +29,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         status = (Button)findViewById(R.id.status);
         status.setOnClickListener(this);
@@ -73,5 +78,49 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, RequestStatus.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout){
+            UserLocalStore userLocalStore = new UserLocalStore(this);
+            userLocalStore.clearUserdata();
+            userLocalStore.setUserloggedIn(false);
+            Intent myintent=new Intent(this, Login.class);
+            startActivity(myintent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        super.onBackPressed();
+
+    }
+
+    @Override
+    protected void onResume() {
+        UserLocalStore userLocalStore;
+        userLocalStore = new UserLocalStore(this);
+        super.onResume();
+        if(!userLocalStore.getuserloggedIn())
+            startActivity(new Intent(this,Login.class));
     }
 }
